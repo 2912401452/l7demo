@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Scene, GaodeMap } from '@antv/l7'
+
+import {layer} from './layers/demo01'
 
 function App() {
+
+  useEffect(() => {
+    const scene = new Scene({
+      id: 'map',
+      map: new GaodeMap({
+        center: [120, 30],
+        zoom: 5
+      })
+    })
+
+    scene.on('loaded', () => {
+      scene.addLayer(layer)
+    })
+  }, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="map" style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0
+    }}>     
     </div>
   );
 }
